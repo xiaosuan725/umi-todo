@@ -17,6 +17,7 @@ export const RightContent: React.FC<Props> = (props) => {
   }
 
   const loginOut = () => {
+    localStorage.removeItem('sessionToken')
     sessionStorage.removeItem('sessionToken')
     setInitialState({
       isLogin: false,

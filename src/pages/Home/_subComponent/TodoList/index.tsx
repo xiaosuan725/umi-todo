@@ -25,7 +25,7 @@ const data = [
 export const TodoList: React.FC<Props> = (props) => {
   const title = props.title
 
-  const stopPropagation = (e) => {
+  const stopPropagation = (e: any) => {
     e.stopPropagation();
   }
 
@@ -43,9 +43,12 @@ export const TodoList: React.FC<Props> = (props) => {
       bordered
       style={{ marginBottom: 16 }}
       extra={<Space onClick={stopPropagation}>
-        <Search placeholder="input search text" allowClear onSearch={onSearch} style={{ width: 200 }} />
-        <Button type='primary' icon={<PlusOutlined />} onClick={addTodoList} />
+        {/* <Search placeholder="input search text" allowClear onSearch={onSearch} style={{ width: 200 }} /> */}
+        <Button size='small' onClick={addTodoList} >新建任务</Button>
       </Space>}
+      actions={[
+        <a>查看更多</a>
+      ]}
     >
       <List
         itemLayout="horizontal"
