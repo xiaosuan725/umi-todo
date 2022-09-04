@@ -40,20 +40,22 @@ export default () => {
     manual: true,
     onSuccess(r) {
       message.success('登陆成功')
+      sessionStorage.setItem('sessionToken', r.sessionToken)
       setInitialState({
         isLogin: true,
         userInfo: r
       })
       if (autoLogin) {
-        sessionStorage.setItem('sessionToken', r.sessionToken)
+        localStorage.setItem('sessionToken', r.sessionToken)
       }
       setTimeout(() => {
         history.push('/home')
       }, 0)
     }
   })
-  async function onFinish(params: API.Login_Request_Body) {
-    runLogin(params)
+  async function onFinish(params: any) {
+    const { autoLogin, ...rest } = params
+    runLogin(rest)
   }
 
   return (

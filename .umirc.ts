@@ -21,14 +21,16 @@ export default defineConfig({
       redirect: '/home',
     },
     {
-      name: '首页',
+      name: '总览',
       path: '/home',
       component: './Home',
+      icon: 'Home'
     },
     {
-      name: '权限演示',
+      name: '知识库',
       path: '/access',
       component: './Access',
+      icon: 'FolderOpen'
     },
     {
       path: '/login',

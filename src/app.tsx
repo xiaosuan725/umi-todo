@@ -6,9 +6,6 @@ import { api } from "./const/api";
 import { getUser } from "./services/todo/UserController";
 import './utils/init-leancloud-sdk'
 
-const sessionToken = sessionStorage.getItem('sessionToken') || undefined
-const extApi = sessionToken ? { 'X-LC-Session': sessionToken } : {}
-
 type InitialType = {
   isLogin: boolean;
   userInfo: API.User_Record | null;
@@ -17,7 +14,7 @@ type InitialType = {
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
 // 更多信息见文档：https://next.umijs.org/docs/api/runtime-config#getinitialstate
 export async function getInitialState(): Promise<InitialType> {
-  const sessionToken = sessionStorage.getItem('sessionToken') || undefined
+  const sessionToken = localStorage.getItem('sessionToken') || sessionStorage.getItem('sessionToken') || undefined
   if (sessionToken) {
     const { data } = await getUser();
     return {
@@ -41,7 +38,7 @@ export const layout = ({ initialState }: {
     },
     onPageChange: () => {
       // 如果没有登录，重定向到 login
-      if (!initialState.isLogin) {
+      if (!initialState.isLogin && location.pathname !== '/login') {
         message.error('请登陆！')
         history.push('/login');
       }
@@ -55,9 +52,10 @@ export const request: RequestConfig = {
   requestInterceptors: [
     (options: any) => {
       // 拦截请求配置，进行个性化处理。
+      const sessionToken = localStorage.getItem('sessionToken') || sessionStorage.getItem('sessionToken') || undefined
       options.headers = {
         ...api,
-        ...extApi,
+        'X-LC-Session': sessionToken,
         'Content-Type': 'application/json',
       }
       return options
