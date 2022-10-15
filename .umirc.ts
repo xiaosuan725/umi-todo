@@ -20,12 +20,12 @@ export default defineConfig({
       path: '/',
       redirect: '/home',
     },
-    {
-      name: '总览',
-      path: '/home',
-      component: './Home',
-      icon: 'Home'
-    },
+    // {
+    //   name: '总览',
+    //   path: '/home',
+    //   component: './Home',
+    //   icon: 'Home'
+    // },
     {
       name: '知识库',
       path: '/access',
@@ -45,6 +45,12 @@ export default defineConfig({
       path: '/mine',
       component: './Mine',
       hideInMenu: true
+    },
+    {
+      name: '待办任务',
+      path: '/todo',
+      component: './Todo',
+      icon: 'CarryOut'
     }
   ],
   npmClient: 'pnpm',
