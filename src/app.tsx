@@ -38,12 +38,12 @@ export const layout = ({ initialState }: {
     },
     onPageChange: () => {
       // 如果没有登录，重定向到 login
-      if (!initialState.isLogin && location.pathname !== '/login') {
+      if (!initialState?.isLogin && location?.pathname !== '/login') {
         message.error('请登陆！')
         history.push('/login');
       }
     },
-    rightContentRender: () => <RightContent record={initialState.userInfo} />,
+    rightContentRender: () => <RightContent record={initialState?.userInfo} />,
     layout: 'mix'
   };
 };
